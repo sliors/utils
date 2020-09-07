@@ -61,26 +61,31 @@ for path in pathlist:
     file_base = matchObj.group(1)
 
     is_extracted = bool(False)
+    error_msg = ''
 
     for pw in args.pw:
         try:
             with rarfile.RarFile(filename=str(path), pwd=pw) as rar:
-                print('Extracting: ' + str(path) + ' with password: ' + pw)
+                if not pw:
+                    print('Extracting: ' + str(path))
+                else:
+                    print('Extracting: ' + str(path) + ' with password: ' + pw)
+
                 rar.extractall(path=str(parent_path))
                 is_extracted = bool(True)
-        except rarfile.BadRarFile:
-            print("Failed to extract, bad rar file: ", path)
-            continue
-        except unrarlib.MissingPassword:
-            print("Missing password")
-            continue
-        except unrarlib.UnrarException:
-            print("Failed to extract, unrar exception, path: ", path)
-            continue
+        except rarfile.BadRarFile as e:
+            error_msg = 'Got rarfile.BadRarFile exception, message: ' + str(e)
+            break
+        except unrarlib.UnrarException as e:
+            error_msg = 'Got unrarlib.UnrarException exception, message: ' + str(e)
+            break
         except RuntimeError as e:
-            print('Failed to extract, path: ' + str(path) + ', exception: ' + str(e))
+            # Invalid password will lead here so we're retrying
+            error_msg = str(e)
             continue
 
     if is_extracted:
         print('Successfully extracted ' + str(path))
         purge(str(parent_path), file_base + '.part[0-9]*.rar')
+    else:
+        print('Failed to extract ' + str(path) + ', error: ' + error_msg)
