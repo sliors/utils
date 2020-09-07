@@ -63,11 +63,7 @@ for path in pathlist:
     is_extracted = bool(False)
 
     for pw in args.pw:
-
         try:
-            #print("Extracting: ", str(path))
-
-            #with rarfile.RarFile(filename=str(path), pwd='snahp.it') as rar:
             with rarfile.RarFile(filename=str(path), pwd=pw) as rar:
                 print('Extracting: ' + str(path) + ' with password: ' + pw)
                 rar.extractall(path=str(parent_path))
@@ -83,7 +79,6 @@ for path in pathlist:
             continue
         except RuntimeError as e:
             print('Failed to extract, path: ' + str(path) + ', exception: ' + str(e))
-            #print("Runtime error, path: ", path, ", exception: " )
             continue
 
     if is_extracted:
