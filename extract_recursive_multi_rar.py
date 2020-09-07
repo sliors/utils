@@ -6,7 +6,10 @@
 
 # Requirements:
 # 1. Run with Python3
-# 2. Install unrar and python-unrar. See https://pypi.org/project/unrar/
+# 2. sudo apt install python3-pip
+# 3. sudo pip3 install unrar
+# 4. wget http://www.rarlab.com/rar/unrarsrc-5.9.4.tar.gz && cd unrar && make lib && make install-lib
+# 5. Add "export UNRAR_LIB_PATH=/usr/lib/libunrar.so" to "/etc/profile"
 
 import re
 from pathlib import Path
