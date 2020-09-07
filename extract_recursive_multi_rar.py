@@ -8,8 +8,10 @@
 # 1. Run with Python3
 # 2. sudo apt install python3-pip
 # 3. sudo pip3 install unrar
-# 4. wget http://www.rarlab.com/rar/unrarsrc-5.9.4.tar.gz && cd unrar && make lib && make install-lib
+# 4. unrar_tgz_url=http://www.rarlab.com/rar/unrarsrc-5.9.4.tar.gz && wget $unrar_tgz_url && tar xvzf $unrar_tgz_url && cd unrar && make lib && make install-lib
+# 4.a. Latest unrar source version is in https://www.rarlab.com/rar_add.htm under "UnRAR source"
 # 5. Add "export UNRAR_LIB_PATH=/usr/lib/libunrar.so" to "/etc/profile"
+
 
 import re
 from pathlib import Path
