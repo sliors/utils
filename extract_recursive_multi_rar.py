@@ -27,7 +27,6 @@ def purge(dir, pattern):
             print("deleting: ", os.path.join(dir, f))
             os.remove(os.path.join(dir, f))
 
-
 parser = argparse.ArgumentParser(description='Recursively extract multi rar files')
 parser.add_argument('-pw', action='append', help='rar password')
 args = parser.parse_args()
@@ -86,6 +85,6 @@ for path in pathlist:
 
     if is_extracted:
         print('Successfully extracted ' + str(path))
-        purge(str(parent_path), file_base + '.part[0-9]*.rar')
+        purge(str(parent_path), re.escape(file_base) + '.part[0-9]*.rar')
     else:
         print('Failed to extract ' + str(path) + ', error: ' + error_msg)
