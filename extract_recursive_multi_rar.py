@@ -62,6 +62,7 @@ for path in pathlist:
     is_extracted = bool(False)
     error_msg = ''
 
+    # loop that tries all passwords we have until we succeed extracting
     for pw in args.pw:
         try:
             with rarfile.RarFile(filename=str(path), pwd=pw) as rar:
@@ -82,6 +83,10 @@ for path in pathlist:
             # Invalid password will lead here so we're retrying
             error_msg = str(e)
             continue
+
+        # if we succeeded to extract, break out of the password trials loop
+        if is_extracted:
+            break
 
     if is_extracted:
         print('Successfully extracted ' + str(path))
