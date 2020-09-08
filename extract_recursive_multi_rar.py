@@ -73,6 +73,7 @@ for path in pathlist:
 
                 rar.extractall(path=str(parent_path))
                 is_extracted = bool(True)
+                break
         except rarfile.BadRarFile as e:
             error_msg = 'Got rarfile.BadRarFile exception, message: ' + str(e)
             break
@@ -83,10 +84,6 @@ for path in pathlist:
             # Invalid password will lead here so we're retrying
             error_msg = str(e)
             continue
-
-        # if we succeeded to extract, break out of the password trials loop
-        if is_extracted:
-            break
 
     if is_extracted:
         print('Successfully extracted ' + str(path))
