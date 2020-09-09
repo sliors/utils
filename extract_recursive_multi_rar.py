@@ -24,7 +24,7 @@ import argparse
 def purge(dir, pattern):
     for f in os.listdir(dir):
         if re.search(pattern, f):
-            print("deleting: ", os.path.join(dir, f))
+            print("Deleting: ", os.path.join(dir, f))
             os.remove(os.path.join(dir, f))
 
 parser = argparse.ArgumentParser(description='Recursively extract multi rar files')
