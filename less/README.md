@@ -1,7 +1,7 @@
 # Summary
 
 Some improvements for `less` usability
-1. Syntax highlighting via source-highlight or pygments
+1. Syntax highlighting via `source-highlight` or `pygments`
 1. Open compressed files via lesspipe
 
 # Installation
