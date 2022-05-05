@@ -4,13 +4,13 @@ SOURCE_HIGHLIGHTER_CMD="source-highlight"
 PYGMENTIZE_CMD="pygmentize"
 
 source_highlight_exists=0
-if command -v $SOURCE_HIGHLIGHTER_CMD &> /dev/null
+if command -v $SOURCE_HIGHLIGHTER_CMD > /dev/null 2>&1
 then
     source_highlight_exists=1
 fi
 
 pygmentize_exists=0
-if command -v $PYGMENTIZE_CMD &> /dev/null
+if command -v $PYGMENTIZE_CMD > /dev/null 2>&1
 then
     pygmentize_exists=1
 fi
