@@ -16,24 +16,33 @@ then
 fi
 
 CMD=""
-if [ $source_highlight_exists = 1 ]; then
-    CMD=$SOURCE_HIGHLIGHTER_CMD
-elif [ $pygmentize_exists = 1 ]; then
-    CMD=$PYGMENTIZE_CMD
-else
-    # none of the highlighers exist
-    exit 1
+# check if the user has set LESS_COLOR_CMD env var to specify which coloring tool is desired
+if [ -n "${LESS_COLOR_CMD}" ]; then
+    if [ "${LESS_COLOR_CMD}" = "${SOURCE_HIGHLIGHTER_CMD}" ] && [ $source_highlight_exists = 1 ]; then
+        CMD=$SOURCE_HIGHLIGHTER_CMD
+    elif [ "${LESS_COLOR_CMD}" = "${PYGMENTIZE_CMD}" ] && [ $pygmentize_exists = 1 ]; then
+        CMD=$PYGMENTIZE_CMD
+    fi
+fi
+
+if [ "${CMD}" = "" ]; then
+    if [ $source_highlight_exists = 1 ]; then
+        CMD=$SOURCE_HIGHLIGHTER_CMD
+    elif [ $pygmentize_exists = 1 ]; then
+        CMD=$PYGMENTIZE_CMD
+    else
+        # none of the highlighers exist
+        exit 1
+    fi
 fi
 
 if [ "$CMD" = "$SOURCE_HIGHLIGHTER_CMD" ]; then
-    COLORIZER=$SOURCE_HIGHLIGHTER_CMD
     DEFAULT_FLAGS="--failsafe -f esc --style-file=esc.style -i"
     AUTO_FLAG="--infer-lang"
     BASH_FLAG="--src-lang=bash"
     ZSH_FLAG="--src-lang=zsh"
     PYTHON_FLAG="--src-lang=python"
 elif [ "$CMD" = "$PYGMENTIZE_CMD" ]; then
-    COLORIZER=$PYGMENTIZE_CMD
     DEFAULT_FLAGS="-f terminal"
     AUTO_FLAG="-g"
     BASH_FLAG="-l sh"
@@ -48,19 +57,19 @@ case "$1" in
     *.ad[asb]|*.asm|*.inc|*.[ch]|*.[ch]pp|*.[ch]xx|*.cc|*.hh|\
     *.lsp|*.l|*.pas|*.p|*.xml|*.xps|*.xsl|*.axp|*.ppd|*.pov|\
     *.diff|*.patch|*.py|*.rb|*.sql|*.ebuild|*.eclass)
-        $COLORIZER $AUTO_FLAG $DEFAULT_FLAGS "$1";;
+        $CMD $AUTO_FLAG $DEFAULT_FLAGS "$1";;
 
     *.bashrc|*.bash_aliases|*.bash_environment)
-        "$COLORIZER" $BASH_FLAG $DEFAULT_FLAGS "$1";;
+        "$CMD" $BASH_FLAG $DEFAULT_FLAGS "$1";;
 
     */.zshrc)
-        "$COLORIZER" $ZSH_FLAG $DEFAULT_FLAGS "$1";;
+        "$CMD" $ZSH_FLAG $DEFAULT_FLAGS "$1";;
 
     *)
         if grep -q "#\!/bin/bash" "$1" 2> /dev/null; then
-            "$COLORIZER" $BASH_FLAG $DEFAULT_FLAGS "$1"
+            "$CMD" $BASH_FLAG $DEFAULT_FLAGS "$1"
         elif grep -q "^#\!/.*/bin.*python" "$1" 2> /dev/null; then
-            "$COLORIZER" $PYTHON_FLAG $DEFAULT_FLAGS "$1"
+            "$CMD" $PYTHON_FLAG $DEFAULT_FLAGS "$1"
         else
             # return 1 since we didn't handle the file
             exit 1
