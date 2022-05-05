@@ -25,7 +25,7 @@ sudo yum install -y source-highlight python-pygments
 Add the following line to your environment variables, e.g., in `~/.bashrc`, `~/.zshrc`.
 
 ```shell
-export LESSOPEN="|lesspipe.sh %s"
+export LESSOPEN="||lesspipe.sh %s"
 ```
 
 ## Copy lessfilter to home folder
