@@ -36,4 +36,8 @@ curl -s -o ~/.lessfilter https://raw.githubusercontent.com/sliors/utils/master/l
 
 By default, `source-highlight` is used.
 
-To configure the coloring tool, set env var `LESS_COLOR_CMD` to either `source-highlight` or `pygmentize`.
+To configure the coloring tool, set env var `LESS_COLOR_CMD` to either `source-highlight` or `pygmentize`. For example:
+
+```shell
+export LESS_COLOR_CMD=pygments
+```
