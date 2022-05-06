@@ -28,7 +28,7 @@ Add the following line to your environment variables, e.g., in `~/.bashrc`, `~/.
 export LESSOPEN="||lesspipe.sh %s"
 ```
 
-## Copy lessfilter to home folder
+## Copy `lessfilter` to home folder
 
 ```shell
 curl -s -o ~/.lessfilter https://raw.githubusercontent.com/sliors/utils/master/less/lessfilter && chmod +x ~/.lessfilter
