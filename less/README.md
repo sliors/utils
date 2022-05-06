@@ -1,6 +1,6 @@
 # Summary
 
-Some improvements for `less` usability
+Some improvements for [`less`](https://man7.org/linux/man-pages/man1/less.1.html) usability
 1. Syntax highlighting via [`source-highlight`](https://www.gnu.org/software/src-highlite/) or [`pygments`](https://pygments.org/)
 1. Open compressed files via [`lesspipe`](https://github.com/wofr06/lesspipe)
 
