@@ -1,8 +1,8 @@
 # Summary
 
 Some improvements for `less` usability
-1. Syntax highlighting via `source-highlight` or `pygments`
-1. Open compressed files via lesspipe
+1. Syntax highlighting via [`source-highlight`](https://www.gnu.org/software/src-highlite/) or [`pygments`](https://pygments.org/)
+1. Open compressed files via [`lesspipe`](https://github.com/wofr06/lesspipe)
 
 # Installation
 
