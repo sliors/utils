@@ -34,7 +34,7 @@ export LESSOPEN="||lesspipe.sh %s"
 curl -s -o ~/.lessfilter https://raw.githubusercontent.com/sliors/utils/master/less/lessfilter && chmod +x ~/.lessfilter
 ```
 
-By default, `source-highlight` is used.
+By default, `source-highlight` is used as the coloring tool.
 
 To configure the coloring tool, set env var `LESS_COLOR_CMD` to either `source-highlight` or `pygmentize`. For example:
 
